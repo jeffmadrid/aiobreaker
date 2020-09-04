@@ -76,14 +76,12 @@ class CircuitBreaker:
         """
         self._timeout_duration = timeout
 
+    # TODO find the use case of this property
     @property
     def opens_at(self) -> Optional[datetime]:
         """Gets the remaining timeout for a breaker."""
         open_at = self._state_storage.opened_at + self.timeout_duration
-        if open_at < datetime.now():
-            return None
-        else:
-            return open_at
+        return open_at
 
     @property
     def time_until_open(self) -> Optional[timedelta]:
